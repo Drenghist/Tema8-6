@@ -17,7 +17,8 @@ public class Serializador {
 
     public static <J> J desSerializar(String string) throws Exception {
         byte[] array = Base64.getDecoder().decode(string);
-        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(array));
+        ByteArrayInputStream pepe = new ByteArrayInputStream(array);
+        ObjectInputStream ois = new ObjectInputStream(pepe);
         J objeto=(J) ois.readObject();
         ois.close();
         return objeto;

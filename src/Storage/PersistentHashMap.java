@@ -12,6 +12,8 @@ import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,8 +67,7 @@ public abstract class  PersistentHashMap <T, J extends Storable> {
             
             for (T llave:datos.keySet()){
                 textoFormateado = String.format("%-1000s", Serializador.serializar((Serializable) datos.get(llave)));  
-                System.out.println(textoFormateado.length());
-                    ras.writeUTF(textoFormateado);
+                ras.writeUTF(textoFormateado);
 
             }
             ras.close();
@@ -78,10 +79,24 @@ public abstract class  PersistentHashMap <T, J extends Storable> {
     }
     
     
-        public void update (J object) throws Exception{
-        throw new Exception("Non implementado");
-    
-    }
+    public void delete (J object) throws Exception{
+    String textoFormateado;
+    if (datos.get(object.getkey())== null) throw new Exception("O cliente non existe");
+    datos.remove((T) object.getkey());
+    try {
+        ras=new RandomAccessFile(file(),"rw");
+        ras.setLength(0);
+
+        for (T llave:datos.keySet()){
+                textoFormateado = String.format("%-1000s", Serializador.serializar((Serializable) datos.get(llave)));    
+                ras.writeUTF(textoFormateado);
+        }
+        ras.close();
+
+    } catch (IOException ex) {
+        System.out.println("Erro o eliminar o rexistro");
+    }        
+}
     
     public J getObject (String key){
         return datos.get(key);
@@ -95,7 +110,11 @@ public abstract class  PersistentHashMap <T, J extends Storable> {
         return keys;
     }
     
-
+    public void wipe(){
+        File f = new File(file()); 
+        f.delete();
+        datos.clear();
+    }
     
         
 }

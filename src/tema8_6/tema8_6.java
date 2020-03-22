@@ -5,6 +5,7 @@
  */
 package tema8_6;
 
+import Utilidades.Texto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,16 +40,34 @@ public class tema8_6 {
                     novoCliente();
                     break;
                 case 2:
-                                        dnis = datos.getKey();
+                    dnis = datos.getKey();
                     System.out.println("Lista de DNIS grabados");
+                    if (dnis.isEmpty()) Texto.linea("No hay DNIs grabados\n");
                     for (String i:dnis){
                         System.out.print("dni: "+i+" ");
                         Cliente persona = datos.getObject(i);
-                        System.out.println("activo: "+persona.isActivo());
+                        System.out.println("activo: "+persona.isActivo()+"\n");
                     }    
                     dnis.clear();
                     break;
                 case 3: 
+                    ArrayList <String> ALClientes = new ArrayList<>();
+                    ALClientes = datos.getKey();
+                    String abuscar = Texto.getLinea("Introduzca DNI a buscar\n");
+                    boolean tag = false;
+                    for (String i:ALClientes){
+                        if (i.equals(abuscar)){
+                            tag = true;
+                            Texto.linea("El DNI "+i+" está guardado");
+                        }
+                    }
+                    if (tag == false) Texto.linea("El DNI no está guardado\n");
+                    break;
+                case 4:
+                    eliminaCliente();
+                    break;
+                case 5:
+                    datos.wipe();
                     break;
                 case 6:
                     flag = true;                 
@@ -99,7 +118,30 @@ public class tema8_6 {
 
         
     }
+    public static void eliminaCliente (){  
+    String temp;
+    String dni;
     
+        
+        try{
+            Texto.linea("Eliminación dun cliente");
+            Texto.linea("-------------------------\n");
+            dni = Texto.getLinea("Introduzca DNI");
+
+            if (datos.getObject(dni)==null){
+                throw new Exception ("DNI non existe");
+            }
+            datos.delete(datos.getObject(dni));
+        }
+        catch (Exception ex){
+            System.out.println("Dato no válido: "+ex.getMessage());
+        }
+        
+        
+        
+
+        
+    }
     
 }
 
