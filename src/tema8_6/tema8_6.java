@@ -19,10 +19,11 @@ public class tema8_6 {
     static int opcion;
     static ClientePersistentHashMap datos = new ClientePersistentHashMap();
     static ArrayList<String> dnis;
+    final static Cliente nulo =new Cliente("nulo", "nulo", "nulo", 0,0);
     
     public static void main (String args[]){
         while (flag == false){
-            System.out.println("Menú");
+            System.out.println("\nMenú");
             System.out.println("--------------\n");
             System.out.println("1- Crear novo cliente");
             System.out.println("2- Listar clientes");
@@ -41,27 +42,20 @@ public class tema8_6 {
                     break;
                 case 2:
                     dnis = datos.getKey();
-                    System.out.println("Lista de DNIS grabados");
+                    System.out.println("Lista de DNIS grabados\n");
                     if (dnis.isEmpty()) Texto.linea("No hay DNIs grabados\n");
                     for (String i:dnis){
                         System.out.print("dni: "+i+" ");
                         Cliente persona = datos.getObject(i);
-                        System.out.println("activo: "+persona.isActivo()+"\n");
+                        System.out.println("activo: "+persona.isActivo());
                     }    
                     dnis.clear();
                     break;
                 case 3: 
-                    ArrayList <String> ALClientes = new ArrayList<>();
-                    ALClientes = datos.getKey();
                     String abuscar = Texto.getLinea("Introduzca DNI a buscar\n");
-                    boolean tag = false;
-                    for (String i:ALClientes){
-                        if (i.equals(abuscar)){
-                            tag = true;
-                            Texto.linea("El DNI "+i+" está guardado");
-                        }
-                    }
-                    if (tag == false) Texto.linea("El DNI no está guardado\n");
+                    Cliente c = datos.getObject(abuscar);
+                    if (c != null) Texto.linea("El DNI está guardado en el fichero");
+                    else Texto.linea("El DNI no existe");
                     break;
                 case 4:
                     eliminaCliente();
@@ -119,7 +113,7 @@ public class tema8_6 {
         
     }
     public static void eliminaCliente (){  
-    String temp;
+    
     String dni;
     
         
@@ -131,6 +125,9 @@ public class tema8_6 {
             if (datos.getObject(dni)==null){
                 throw new Exception ("DNI non existe");
             }
+            
+            System.out.println("direccion a borrar: "+datos.getPointer(datos.getObject(dni)));
+            datos.override(datos.getPointer(datos.getObject(dni)), nulo); //sobreescribo el campo con el objeto "nulo"
             datos.delete(datos.getObject(dni));
         }
         catch (Exception ex){
