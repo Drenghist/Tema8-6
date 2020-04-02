@@ -1,4 +1,3 @@
-
 package Utilidades;
 
 import java.io.ByteArrayInputStream;
@@ -10,11 +9,18 @@ import java.util.Base64;
 
 /**
  *
- * @author alex (basado no de xavi)
+ * @author Alex (basado no de Xavi)
+ * @version 2.0 Lectura por registros
+ * @since 02/04/2020
  */
 public class Serializador {
 
-
+    /**
+     *
+     * @param string cadea a desserializar
+     * @return retorna o obxecto serializado anteriormente
+     * @throws Exception
+     */
     public static <J> J desSerializar(String string) throws Exception {
         byte[] array = Base64.getDecoder().decode(string);
         ByteArrayInputStream pepe = new ByteArrayInputStream(array);
@@ -24,6 +30,12 @@ public class Serializador {
         return objeto;
    }
 
+    /**
+     *
+     * @param objeto obxecto a serializar
+     * @return retorna o string do obxecto serializado
+     * @throws Exception
+     */
     public static String serializar(Serializable objeto) throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream( baos );

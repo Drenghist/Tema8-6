@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tema8_6;
 
 import Utilidades.Texto;
@@ -12,15 +7,21 @@ import java.util.Scanner;
 /**
  *
  * @author Alex
+ * @version 2.0 Lectura por registros
+ * @since 02/04/2020
  */
 public class tema8_6 {
+    final static Cliente nulo =new Cliente("nulo", "nulo", "nulo", 0,0);
     static boolean flag = false;
     static Scanner teclado = new Scanner(System.in);
     static int opcion;
-    static ClientePersistentHashMap datos = new ClientePersistentHashMap();
+    static ClientePersistentHashMap datos = new ClientePersistentHashMap(nulo);
     static ArrayList<String> dnis;
-    final static Cliente nulo =new Cliente("nulo", "nulo", "nulo", 0,0);
     
+    /**
+     *
+     * @param args
+     */
     public static void main (String args[]){
         while (flag == false){
             System.out.println("\nMenú");
@@ -33,7 +34,7 @@ public class tema8_6 {
             System.out.println("6- Sair\n");
             try{
             opcion = Integer.parseInt(teclado.nextLine());
-            } finally{
+            } catch (Exception ex){
             }
             
             switch (opcion){
@@ -79,6 +80,9 @@ public class tema8_6 {
         
     }
     
+    /**
+     * Crea un novo cliente e o engade na memoria
+     */
     public static void novoCliente (){
 
     String dni, nombre, direccion;
@@ -112,6 +116,11 @@ public class tema8_6 {
 
         
     }
+
+    /**
+     * Elimina un cliente, eliminándoo do almacenamento volátil (hashmap) con .delete,
+     * e tamén o elimina do almacenamento persistente con .override sobreescribíndoo
+     */
     public static void eliminaCliente (){  
     
     String dni;

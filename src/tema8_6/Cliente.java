@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tema8_6;
 
 import Storage.Storable;
@@ -11,6 +6,8 @@ import java.io.Serializable;
 /**
  *
  * @author Alex
+ * @version 2.0 Lectura por registros
+ * @since 02/04/2020
  */
 public class Cliente implements Serializable, Storable {
     private String dni;
@@ -20,6 +17,14 @@ public class Cliente implements Serializable, Storable {
     private boolean activo;
     private int deuda;
     
+    /**
+     *
+     * @param dni Define o DNI do cliente
+     * @param nome Define o nome do cliente
+     * @param direccion Define o enderezo do cliente
+     * @param telefono Define o teléfono do cliente (só díxitos)
+     * @param deuda Define a deuda pendente do cliente
+     */
     public Cliente (String dni, String nome, String direccion, double telefono, int deuda){
         this.dni=dni;
         this.nome=nome;
@@ -31,89 +36,93 @@ public class Cliente implements Serializable, Storable {
     }
 
     /**
-     * @return the dni
+     * @return retorna o dni
      */
     public String getDni() {
         return dni;
     }
 
     /**
-     * @param dni the dni to set
+     * @param dni modifica o valor do DNI
      */
     public void setDni(String dni) {
         this.dni = dni;
     }
 
     /**
-     * @return the nome
+     * @return retorna o nome
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * @param nome the nome to set
+     * @param nome modifica o valor do nome
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return the direccion
+     * @return retorna o enderezo
      */
     public String getDireccion() {
         return direccion;
     }
 
     /**
-     * @param direccion the direccion to set
+     * @param direccion modifica o valor do enderezo
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * @return the telefono
+     * @return retorna o teléfono
      */
     public double getTelefono() {
         return telefono;
     }
 
     /**
-     * @param telefono the telefono to set
+     * @param telefono modifica o valor do teléfono (só díxitos)
      */
     public void setTelefono(double telefono) {
         this.telefono = telefono;
     }
     
+    /**
+     *
+     * @return retorna o valor chave (o DNI)
+     */
     @Override
     public String getkey(){
         return this.dni;
     }
 
     /**
-     * @return the activo
+     * @return retorna se o cliente está ou non activo
      */
     public boolean isActivo() {
         return activo;
     }
 
     /**
-     * @param activo the activo to set
+     * @param activo modifica o valor de activo do cliente
      */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
     /**
-     * @return the deuda
+     * @return retornar a dauda pendente do cliente
      */
     public int getDeuda() {
         return deuda;
     }
 
     /**
-     * @param deuda the deuda to set
+     * @param deuda modifica o valor da deuda
      */
     public void setDeuda(int deuda) {
         this.deuda = deuda;

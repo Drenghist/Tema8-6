@@ -1,14 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Storage;
 
 /**
  *
- * @author Alex
+ * @author Alex (basado no de Xavi)
+ * @version 2.0 Lectura por registros
+ * @since 02/04/2020
+ * @param <T>
  */
 public interface  Storable <T> {
+
+    /**
+     *
+     * @return
+     */
     public T getkey();
 }
